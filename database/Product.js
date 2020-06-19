@@ -17,7 +17,6 @@ const productSchema = new mongoose.Schema({
   price: Number,
   avail: String,
   shipping: String
-
 });
 
 const Product = mongoose.model("Product", productSchema);
