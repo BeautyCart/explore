@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('./index.js');
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -8,11 +8,11 @@ const userSchema = new mongoose.Schema({
   img: String,
   title: String,
   category: String,
-  time: {type Data},
+  time: {type: Date},
   hashtags: [String],
   ranks: [String],
   disc: String,
-  products: [Num]
+  products: [Number]
 });
 
 const User = mongoose.model("User", userSchema);
