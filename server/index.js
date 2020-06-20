@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const Product = require('../database/Product.js');
-const User = require('../databse/User.js');
+const User = require('../database/User.js');
 
 const app = express();
 const port = 3000;
@@ -10,6 +10,25 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/explore' ,(req,res) => res.send("Hello World"));
+app.get('/explore' , function (req,res) {
+  User.find().limit(20).exec((err, doc) => {
+    if (err) {
+      console.log(`Get req /explore encounter err: ${err}`);
+      res.status(400).end();
+    } else {
+      res.status(200).send(doc);
+    }
+  })
+});
 
-app.list(port, () => console.log(`Server listening at http://localhost:${port}`));
+app.get('/explore/products', (req, res) => {
+  Product.find().exec((err, doc) => {
+    if (err) {
+      console.log(`Get req /explore/products encounter err: ${err}`);
+      res.status(400).end();
+    } else {
+      res.status(200).send(doc);
+    }
+  })
+})
+app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
