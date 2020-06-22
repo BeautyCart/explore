@@ -11,15 +11,21 @@ class App extends React.Component{
     }
   }
 
+  const Title = styled.h1`
+    font-size: 1.5em;
+    test-allign: center;
+    color: palevioletred
+  `
+
   render() {
     return (
       <div>
         <h2>Explore This Product</h2>
         <div>
           <div>Looks bar</div>
-          <div>
+          <Title>
             Carousel
-          </div>
+          </Title>
         </div>
       </div>
     )
