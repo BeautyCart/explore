@@ -14,9 +14,13 @@ class App extends React.Component{
   render() {
     return (
       <div>
-        <p>
-          Hello Rendered World
-        </p>
+        <h2>Explore This Product</h2>
+        <div>
+          <div>Looks bar</div>
+          <div>
+            Carousel
+          </div>
+        </div>
       </div>
     )
   }
