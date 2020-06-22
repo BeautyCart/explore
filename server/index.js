@@ -10,7 +10,7 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/', express.static("../client/dist"))
+app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/explore' , function (req,res) {
   User.find().limit(20).exec((err, doc) => {
@@ -33,4 +33,4 @@ app.get('/explore/products', (req, res) => {
     }
   })
 })
-app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
+app.listen(port, () => {console.log(`Server listening at http://localhost:${port}`)});

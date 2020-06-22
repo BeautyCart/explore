@@ -18,7 +18,7 @@ class App extends React.Component{
         <div>
           <div>Looks bar</div>
           <div>
-            Carousel
+            Carousel Test
           </div>
         </div>
       </div>
