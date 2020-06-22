@@ -28,6 +28,7 @@
     "mongoose": "^5.9.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -45,5 +46,8 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^26.0.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
