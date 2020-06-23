@@ -6,8 +6,10 @@ const axios = require('axios');
 const Container = styled.div`
   width: 980px;
   /* background: #ccc; */
+  margin: auto;
   min-height: 164px;
   overflow: hidden;
+  position: relative;
 `;
 
 const Track = styled(Container)`
@@ -33,8 +35,17 @@ const Nav = styled.button`
   height: 40px;
   border: 1px solid #ccc;
   border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
 `
-
+const NavLeft = styled(Nav)`
+  left: 10px;
+`
+const NavRight = styled(Nav)`
+  right: 10px;
+`
 class Carousel extends React.Component{
   constructor(props) {
     super(props);
@@ -77,12 +88,12 @@ class Carousel extends React.Component{
           <Card></Card>
         </CardBox>
       </Track>
-      <Nav>
+      <NavLeft>
         <span class="material-icons">navigate_before</span>
-      </Nav>
-      <Nav>
+      </NavLeft>
+      <NavRight>
         <span class="material-icons">navigate_next</span>
-      </Nav>
+      </NavRight>
     </Container>
   )}
 }
