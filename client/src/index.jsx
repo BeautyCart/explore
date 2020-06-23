@@ -16,18 +16,27 @@ let getUserBasic = (res) => {
   return users;
 }
 
-axios.get('/explore')
-.then((res) => {
-  console.log(res);
-  console.log(getUserBasic(res.data));
-})
-
 class App extends React.Component{
   constructor() {
     super();
     this.state = {
-
+      users: []
     }
+
+    this.getUsers = this.getUsers.bind(this);
+  }
+
+  getUsers() {
+    axios.get('/explore')
+    .then((res) => {
+      let userData = getUserBasic(res.data);
+      this.setState({users: userData});
+      console.log(`index.jsx userdata is ${userData}`);
+    })
+  }
+
+  componentDidMount() {
+    this.getUsers();
   }
 
   render() {
@@ -37,7 +46,7 @@ class App extends React.Component{
         <div>
           <div>Looks bar</div>
           <div>
-            <Carousel />
+            <Carousel users={this.state.users} />
           </div>
         </div>
       </div>

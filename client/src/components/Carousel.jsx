@@ -10,9 +10,14 @@ class Carousel extends React.Component{
     }
   }
 
+
+
   render() {return (
     <div>
       Hello Carousel
+      <div>
+        {console.log(`this.props.users[0] is ${this.props.users}`)}
+      </div>
     </div>
 
   )}
