@@ -28,6 +28,13 @@ const Card = styled(CardBox)`
   /* background: blue; */
   border: 1px solid #aaa;
 `
+const Nav = styled.button`
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+`
+
 class Carousel extends React.Component{
   constructor(props) {
     super(props);
@@ -70,8 +77,12 @@ class Carousel extends React.Component{
           <Card></Card>
         </CardBox>
       </Track>
-      <button>Prev</button>
-      <button>Next</button>
+      <Nav>
+        <span class="material-icons">navigate_before</span>
+      </Nav>
+      <Nav>
+        <span class="material-icons">navigate_next</span>
+      </Nav>
     </Container>
   )}
 }
