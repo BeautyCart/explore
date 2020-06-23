@@ -10,9 +10,12 @@ class Carousel extends React.Component{
     }
   }
 
-  render() {
+  render() {return (
+    <div>
+      Hello Carousel
+    </div>
 
-  }
+  )}
 }
 
 export default Carousel;

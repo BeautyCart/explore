@@ -5,6 +5,23 @@ import Carousel from './components/Carousel.jsx';
 
 const axios = require('axios');
 
+let getUserBasic = (res) => {
+  let users = [];
+  for (var i = 0; i < res.length; i++) {
+    users.push({
+    'id': res[i]['_id'],
+    'image': res[i]['mainImg']
+    })
+  }
+  return users;
+}
+
+axios.get('/explore')
+.then((res) => {
+  console.log(res);
+  console.log(getUserBasic(res.data));
+})
+
 class App extends React.Component{
   constructor() {
     super();
