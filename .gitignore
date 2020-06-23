@@ -2,3 +2,5 @@
 .DS_Store
 node_modules/
 client/dist/bundle.js
+client/coverage/
+client/src/components/__snapshots__
