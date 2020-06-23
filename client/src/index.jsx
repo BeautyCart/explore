@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Carousel from './components/Carousel.jsx';
+
 const axios = require('axios');
 
 class App extends React.Component{
@@ -18,7 +20,7 @@ class App extends React.Component{
         <div>
           <div>Looks bar</div>
           <div>
-            Carousel Test
+            <Carousel />
           </div>
         </div>
       </div>
