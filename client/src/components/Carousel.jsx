@@ -45,53 +45,76 @@ const NavLeft = styled(Nav)`
 `
 const NavRight = styled(Nav)`
   right: 10px;
+
 `
+let track;
+let carouselWidth;
+
 class Carousel extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       users: "loading"
-    }
+    };
+    this.prevClick = this.prevClick.bind(this);
+    this.nextClick = this.nextClick.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // track = find(document.body, Track); //did not work
+    track = document.getElementById('testTrack');
+    carouselWidth = document.getElementById('testCarousel').offsetWidth;
+    console.log(`CarouselWidth is ${carouselWidth}`);
+    console.log(`Track is ${track}`);
+  }
+
+  prevClick() {
+    console.log('fn prevClick has run from Carousel.jsx');
+  }
+
+  nextClick(){
+    console.log('fn nextClick has run from Carousel.jsx');
+    console.log(`nextClick track is ${track}`);
+    // track.style.transform = `translateX(-${carouselWidth}px)`;
+    track.style.transform = `translateX(-940px)`;
+  }
 
   render() {return (
-    <Container>
-      <Track>
+    <Container id='testCarousel'>
+      <Track id='testTrack'>
         {console.log(`this.props.users[0] is ${this.state.users[0]}`)}
         <CardBox>
-          <Card></Card>
+          <Card>1</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>2</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>3</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>4</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>5</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>6</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>7</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>8</Card>
         </CardBox>
         <CardBox>
-          <Card></Card>
+          <Card>9</Card>
         </CardBox>
       </Track>
-      <NavLeft>
+      <NavLeft onClick={this.prevClick}>
         <span class="material-icons">navigate_before</span>
       </NavLeft>
-      <NavRight>
+      <NavRight onClick={this.nextClick}>
         <span class="material-icons">navigate_next</span>
       </NavRight>
     </Container>

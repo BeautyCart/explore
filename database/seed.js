@@ -69,7 +69,7 @@ let genProduct = () => {
 let genUser = () => {
   let newUser = {
     username: faker.name.firstName() + faker.name.lastName(),
-    mainImg: "https://loremflickr.com/320/240/female,model/all",
+    mainImg: "https://loremflickr.com/320/240/female,face,model/all",
     image: "",
     title: faker.lorem.sentence(),
     category: faker.lorem.word(),
