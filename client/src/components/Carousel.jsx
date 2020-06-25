@@ -91,6 +91,8 @@ class Carousel extends React.Component{
 
   render() {return (
     <Wrapper>
+      <div>'Looks(162)'</div>
+      <br />
       <Container id='testCarousel'>
         <Track id='testTrack'>
           {console.log(`this.props.users[0] is ${this.state.users[0]}`)}
