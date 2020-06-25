@@ -3,17 +3,27 @@ import styled from 'styled-components';
 
 const axios = require('axios');
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 980px;
   /* background: #ccc; */
   margin: auto;
   min-height: 164px;
   overflow: hidden;
   position: relative;
+`
+
+const Container = styled.div`
+  /* width: 940px; */
+  /* background: #ccc; */
+  margin: auto;
+  min-height: 164px;
+  /* overflow: hidden; */
+  position: relative;
 `;
 
 const Track = styled(Container)`
   width: 940px;
+  min-height: 164px;
   display: flex;
 `
 const CardBox = styled(Container)`
@@ -80,44 +90,46 @@ class Carousel extends React.Component{
   }
 
   render() {return (
-    <Container id='testCarousel'>
-      <Track id='testTrack'>
-        {console.log(`this.props.users[0] is ${this.state.users[0]}`)}
-        <CardBox>
-          <Card>1</Card>
-        </CardBox>
-        <CardBox>
-          <Card>2</Card>
-        </CardBox>
-        <CardBox>
-          <Card>3</Card>
-        </CardBox>
-        <CardBox>
-          <Card>4</Card>
-        </CardBox>
-        <CardBox>
-          <Card>5</Card>
-        </CardBox>
-        <CardBox>
-          <Card>6</Card>
-        </CardBox>
-        <CardBox>
-          <Card>7</Card>
-        </CardBox>
-        <CardBox>
-          <Card>8</Card>
-        </CardBox>
-        <CardBox>
-          <Card>9</Card>
-        </CardBox>
-      </Track>
-      <NavLeft onClick={this.prevClick}>
-        <span class="material-icons">navigate_before</span>
-      </NavLeft>
-      <NavRight onClick={this.nextClick}>
-        <span class="material-icons">navigate_next</span>
-      </NavRight>
-    </Container>
+    <Wrapper>
+      <Container id='testCarousel'>
+        <Track id='testTrack'>
+          {console.log(`this.props.users[0] is ${this.state.users[0]}`)}
+          <CardBox>
+            <Card>1</Card>
+          </CardBox>
+          <CardBox>
+            <Card>2</Card>
+          </CardBox>
+          <CardBox>
+            <Card>3</Card>
+          </CardBox>
+          <CardBox>
+            <Card>4</Card>
+          </CardBox>
+          <CardBox>
+            <Card>5</Card>
+          </CardBox>
+          <CardBox>
+            <Card>6</Card>
+          </CardBox>
+          <CardBox>
+            <Card>7</Card>
+          </CardBox>
+          <CardBox>
+            <Card>8</Card>
+          </CardBox>
+          <CardBox>
+            <Card>9</Card>
+          </CardBox>
+        </Track>
+        <NavLeft onClick={this.prevClick}>
+          <span class="material-icons">navigate_before</span>
+        </NavLeft>
+        <NavRight onClick={this.nextClick}>
+          <span class="material-icons">navigate_next</span>
+        </NavRight>
+      </Container>
+    </Wrapper>
   )}
 }
 
