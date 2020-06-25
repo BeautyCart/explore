@@ -4,7 +4,15 @@ import styled from 'styled-components';
 const axios = require('axios');
 
 const Wrapper = styled.div`
-  width: 980px;
+  width: 940px;
+  /* background: #ccc; */
+  margin: auto;
+  min-height: 164px;
+  /* overflow: hidden; */
+  position: relative;
+`
+const Overflow = styled.div`
+  width: 940px;
   /* background: #ccc; */
   margin: auto;
   min-height: 164px;
@@ -41,7 +49,7 @@ const Card = styled(CardBox)`
   height: 100%;
   padding: 0px;
   /* background: blue; */
-  border: 1px solid #aaa;
+  /* border: 1px solid #aaa; */
 `
 const Profile = styled.img`
   width: 164px;
@@ -53,18 +61,20 @@ const Profile = styled.img`
 const Nav = styled.button`
   width: 40px;
   height: 40px;
-  border: 1px solid #ccc;
-  border-radius: 50%;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 50%; */
+  border: none;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
+  /* background: #fff; */
+  background: none;
 `
 const NavLeft = styled(Nav)`
-  left: 10px;
+  left: -20px;
 `
 const NavRight = styled(Nav)`
-  right: 10px;
+  right: -20px;
 
 `
 let track;
@@ -102,28 +112,34 @@ class Carousel extends React.Component{
   }
 
   render() {
+    {console.log(`This is render props.users` + this.props.users.length)}
     {console.log(this.props.users)};
+    this.props.users.map(user => {console.log(`User in maps is ${user}`)})
+    this.props.users.map(user => {console.log(user)})
     return (
     <Wrapper>
       <div>'Looks(162)'</div>
       <br />
       <Container id='testCarousel'>
-        <Track id='testTrack'>
-          {/* {console.log(`this.props.users[0] is ${this.state.users[0]}`)} */}
-          {/* this.props.users.map((user) => (
-            <CardBox>
-              <Card><Profile src={user.image}></Profile></Card>
-            </CardBox>
-          )) */}
-          <CardBox>
-            <Card><Profile src='https://loremflickr.com/320/240/female,face,model/all'></Profile></Card>
-          </CardBox>
-        </Track>
+        <Overflow>
+          <Track id='testTrack'>
+            {/* {console.log(`this.props.users[0] is ${this.state.users[0]}`)} */}
+            {this.props.users.map(user => (
+              <CardBox>
+                <Card><Profile src={user.image}></Profile></Card>
+              </CardBox>
+            ))}
+
+            {/* <CardBox>
+              <Card><Profile src='https://loremflickr.com/320/240/female,face,model/all'></Profile></Card>
+            </CardBox> */}
+          </Track>
+        </Overflow>
         <NavLeft onClick={this.prevClick}>
-          <span class="material-icons">navigate_before</span>
+          <span className="material-icons">navigate_before</span>
         </NavLeft>
         <NavRight onClick={this.nextClick}>
-          <span class="material-icons">navigate_next</span>
+          <span className="material-icons">navigate_next</span>
         </NavRight>
       </Container>
     </Wrapper>
