@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const axios = require('axios');
+const defWidth = '940px';
 
 const Wrapper = styled.div`
-  width: 940px;
+  width: ${props => props.width? props.width : defWidth};
   /* background: #ccc; */
   margin: auto;
   min-height: 164px;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
   position: relative;
 `
 const Overflow = styled.div`
-  width: 940px;
+  width: ${props => props.width? props.width : defWidth};
   /* background: #ccc; */
   margin: auto;
   min-height: 164px;
@@ -30,7 +31,7 @@ const Container = styled.div`
 `;
 
 const Track = styled(Container)`
-  width: 940px;
+  width: ${props => props.width? props.width : defWidth};
   min-height: 164px;
   display: flex;
   transition: transform 0.6s;
@@ -56,11 +57,14 @@ const Profile = styled.img`
   width: 164px;
   height: 164px;
   object-fit: cover;
+  &:hover {
+    opacity: 0.5;
+  };
 `
 
 const Nav = styled.button`
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 164px;
   /* border: 1px solid #ccc; */
   /* border-radius: 50%; */
   border: none;
@@ -71,10 +75,11 @@ const Nav = styled.button`
   background: none;
 `
 const NavLeft = styled(Nav)`
-  left: -20px;
+  left: -30px;
+  opacity: 0.5;
 `
 const NavRight = styled(Nav)`
-  right: -20px;
+  right: -30px;
 
 `
 let track;
@@ -142,10 +147,16 @@ class Carousel extends React.Component{
           </Track>
         </Overflow>
         <NavLeft onClick={this.prevClick}>
-          <span className="material-icons">navigate_before</span>
+          {/* <span className="material-icons">navigate_before</span> */}
+          <svg viewBox="0 0 16 32">
+            <path d="M2.2 16.052l13.5-14.33c.1-.098.3-.397.3-.695 0-.498-.4-.995-.9-.995-.3 0-.5.2-.6.298L.4 15.256c-.2.298-.4.497-.4.796 0 .298.1.398.2.497l.1.1L14.5 31.67c.1.1.3.3.6.3.5 0 .9-.5.9-.996 0-.3-.2-.498-.3-.697L2.2 16.05z"></path>
+          </svg>
         </NavLeft>
         <NavRight onClick={this.nextClick}>
-          <span className="material-icons">navigate_next</span>
+          {/* <span className="material-icons">navigate_next</span> */}
+          <svg viewBox="0 0 16 32">
+            <path d="M13.8 15.952L.3 30.28c-.1.1-.3.398-.3.697 0 .497.4.995.9.995.3 0 .5-.2.6-.3L15.6 16.75c.2-.298.4-.497.4-.796 0-.298-.1-.398-.2-.497l-.1-.1L1.5.33C1.4.23 1.2.032.9.032c-.5 0-.9.497-.9.995 0 .298.2.497.3.696l13.5 14.23z"></path>
+          </svg>
         </NavRight>
       </Container>
     </Wrapper>

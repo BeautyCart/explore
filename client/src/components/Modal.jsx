@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Carousel from './Carousel.jsx'
+
 const axios = require('axios');
 
 const Wrapper = styled.div`
@@ -92,6 +94,15 @@ const Username = styled.div`
   font-family: "helvetica neue",helvetica,arial,sans-serif;
   font-size: 12px;
   font-weight: 700;
+  &:hover {
+    opacity: 0.5;
+  }
+`
+const Badge = styled.img`
+  height: 15px;
+  max-height: 15px;
+  object-fit: contain;
+  padding: 1px 2px;
 `
 
 const LeftWrap = styled.div`
@@ -99,7 +110,8 @@ const LeftWrap = styled.div`
   flex-direction: column;
 `
 const BadgeContainer = styled.div`
-
+  display: flex;
+  flex-direction: row;
 `
 const UserInfo = styled.div`
   display: flex;
@@ -158,7 +170,8 @@ class Modal extends React.Component{
                 <UserInfo>
                   <Username>{this.props.user.username}</Username>
                   <BadgeContainer>
-
+                    <Badge src={(this.props.user.ranks) ? this.props.user.ranks[0] : ''} />
+                    <Badge src={(this.props.user.ranks) ? this.props.user.ranks[1] : ''} />
                   </BadgeContainer>
                 </UserInfo>
               </UserWrap>

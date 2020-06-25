@@ -110,7 +110,7 @@ class App extends React.Component{
             <Carousel users={this.state.users} onProfileClick={this.onProfileClick}/>
           </div>
         </div>
-        <button onClick={ e => {this.showModal()}}>Modal Test</button>
+        {/* <button onClick={ e => {this.showModal()}}>Modal Test</button> */}
         <Modal show={this.state.show} user={this.state.currentUser} onClose={this.showModal}>Hello Modal!</Modal>
       </Temp>
     )
