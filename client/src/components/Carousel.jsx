@@ -28,18 +28,28 @@ const Track = styled(Container)`
 `
 const CardBox = styled(Container)`
   width: 188px;
+  max-width: 188px;
   flex-shrink: 0;
-  height: 164px:
+  height: 164px;
+  max-height: 164px:
   border: 1px solid #aaa;
   padding: 0px 12px;
   box-sizing: border-box;
 `
 const Card = styled(CardBox)`
-  width: 100%;
+  width: 100%
   height: 100%;
+  padding: 0px;
   /* background: blue; */
   border: 1px solid #aaa;
 `
+const Profile = styled.img`
+  width: 164px;
+  height: 164px;
+  object-fit: cover;
+
+`
+
 const Nav = styled.button`
   width: 40px;
   height: 40px;
@@ -59,6 +69,8 @@ const NavRight = styled(Nav)`
 `
 let track;
 let carouselWidth;
+
+let source1;
 
 class Carousel extends React.Component{
   constructor(props) {
@@ -98,32 +110,13 @@ class Carousel extends React.Component{
       <Container id='testCarousel'>
         <Track id='testTrack'>
           {/* {console.log(`this.props.users[0] is ${this.state.users[0]}`)} */}
+          {/* this.props.users.map((user) => (
+            <CardBox>
+              <Card><Profile src={user.image}></Profile></Card>
+            </CardBox>
+          )) */}
           <CardBox>
-            <Card><img src={this.props.users[0].image} /></Card>
-          </CardBox>
-          <CardBox>
-            <Card>2</Card>
-          </CardBox>
-          <CardBox>
-            <Card>3</Card>
-          </CardBox>
-          <CardBox>
-            <Card>4</Card>
-          </CardBox>
-          <CardBox>
-            <Card>5</Card>
-          </CardBox>
-          <CardBox>
-            <Card>6</Card>
-          </CardBox>
-          <CardBox>
-            <Card>7</Card>
-          </CardBox>
-          <CardBox>
-            <Card>8</Card>
-          </CardBox>
-          <CardBox>
-            <Card>9</Card>
+            <Card><Profile src='https://loremflickr.com/320/240/female,face,model/all'></Profile></Card>
           </CardBox>
         </Track>
         <NavLeft onClick={this.prevClick}>
@@ -135,6 +128,53 @@ class Carousel extends React.Component{
       </Container>
     </Wrapper>
   )}
+
+  // render() {
+  //   {console.log(this.props.users)};
+  //   return (
+  //   <Wrapper>
+  //     <div>'Looks(162)'</div>
+  //     <br />
+  //     <Container id='testCarousel'>
+  //       <Track id='testTrack'>
+  //         {/* {console.log(`this.props.users[0] is ${this.state.users[0]}`)} */}
+  //         <CardBox>
+  //           <Card>1</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>2</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>3</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>4</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>5</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>6</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>7</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>8</Card>
+  //         </CardBox>
+  //         <CardBox>
+  //           <Card>9</Card>
+  //         </CardBox>
+  //       </Track>
+  //       <NavLeft onClick={this.prevClick}>
+  //         <span class="material-icons">navigate_before</span>
+  //       </NavLeft>
+  //       <NavRight onClick={this.nextClick}>
+  //         <span class="material-icons">navigate_next</span>
+  //       </NavRight>
+  //     </Container>
+  //   </Wrapper>
+  // )}
 }
 
 export default Carousel;

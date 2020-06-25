@@ -32,13 +32,19 @@ let getUserBasic = (res) => {
   return users;
 }
 
-
+let defaultUsers = [
+  {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+  {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+  {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+  {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+  {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'}
+];
 
 class App extends React.Component{
   constructor() {
     super();
     this.state = {
-      users: [],
+      users: defaultUsers,
       show: false
     }
 

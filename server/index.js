@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/explore' , function (req,res) {
-  User.find().limit(5).exec((err, doc) => {
+  User.find().limit(9).exec((err, doc) => {
     if (err) {
       console.log(`Get req /explore encounter err: ${err}`);
       res.status(400).end();
