@@ -46,12 +46,13 @@ const MainPane = styled.div`
   padding: 20px;
   cursor: auto;
 `
-const MainImg = styled.div`
-  width: 420px;
-  height: 500px;
+const MainImg = styled.img`
+  max-width: 420px;
+  object-fit: cover;
+  /* height: 500px;
   border: 2px solid #ccc;
   border-radius: 10px;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 `
 const MainInfo = styled.div`
   display: flex;
@@ -70,9 +71,15 @@ const InfoHeader = styled.div`
   /* display: flex; */
   /* align-items: center; */
   /* justify-content: flex-end; */
-  font-size: 1.2em;
+  font-family: "helvetica neue",helvetica,arial,sans-serif;
+  font-size: 14px;
+  font-weight: 700;
 `
 const InfoGroupTime = styled.div`
+  font-family: "helvetica neue",helvetica,arial,sans-serif;
+  color: rgb(117, 117, 117);
+  font-size: 12px;
+  font-weight: 700;
 `
 const UserWrap = styled.div`
   display: flex;
@@ -82,7 +89,9 @@ const Avatar = styled.div`
 
 `
 const Username = styled.div`
-
+  font-family: "helvetica neue",helvetica,arial,sans-serif;
+  font-size: 12px;
+  font-weight: 700;
 `
 
 const LeftWrap = styled.div`
@@ -109,20 +118,21 @@ class Modal extends React.Component{
     // };
 
     // this.function = this.function.bind(this);
-    // this.onClose = this.onClose.bind(this);
+    this.greyOnClose = this.greyOnClose.bind(this);
   }
 
-  // onClose(e) {
-  //   console.log(`onClose has run`);
-  //   this.props.show = false;
-  // };
+  greyOnClose(e) {
+    if (e.target.id == 'grey') {
+      this.props.onClose();
+    }
+  };
 
   render() {
     if(!this.props.show) {
       return null;
     }
     return (
-      <Wrapper>
+      <Wrapper id='grey' onClick={this.greyOnClose}>
         <Container>
           {/* <div>{this.props.children}</div> */}
           <Header>
@@ -133,21 +143,20 @@ class Modal extends React.Component{
           </Header>
           <MainWrap>
             <MainPane>
-              <MainImg></MainImg>
+              <MainImg src={this.props.user.mainImg}></MainImg>
             </MainPane>
             <MainInfo>
               <InfoWrap>
-                <InfoHeader> Title goes here
+                <InfoHeader>{this.props.user.title}
 
                 </InfoHeader>
-                <br />
-                <InfoGroupTime>From Group | July 4th</InfoGroupTime>
-                <span>#tags $tags</span>
+                <InfoGroupTime>{this.props.user.category} | {this.props.user.time}</InfoGroupTime>
+                <span>{this.props.user.hashtags}</span>
               </InfoWrap>
               <UserWrap>
                 <Avatar></Avatar>
                 <UserInfo>
-                  <Username>TestUserName</Username>
+                  <Username>{this.props.user.username}</Username>
                   <BadgeContainer>
 
                   </BadgeContainer>

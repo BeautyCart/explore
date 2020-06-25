@@ -69,16 +69,18 @@ class App extends React.Component{
     this.setState({
       show: !this.state.show
     })
-    if (e) {console.log(`onProfileClick id is ${e.target.value}`)};
+    // if (e) {console.log(`onProfileClick id is ${e.target.value}`)};
   }
 
   onProfileClick(e) {
     let id;
     if (e) {
+      this.showModal();
       console.log(`onProfileClick id is ${e}`);
       axios.get(`/user/${e}`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data[0]);
+        this.setState({currentUser: res.data[0]});
       })
     }
   }
@@ -103,7 +105,7 @@ class App extends React.Component{
           </div>
         </div>
         <button onClick={ e => {this.showModal()}}>Modal Test</button>
-        <Modal show={this.state.show} onClose={this.showModal}>Hello Modal!</Modal>
+        <Modal show={this.state.show} user={this.state.currentUser} onClose={this.showModal}>Hello Modal!</Modal>
       </Temp>
     )
   }

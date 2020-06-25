@@ -13,7 +13,13 @@ const french = ['Homme', 'Femme', 'Au Revoir', 'Monde', 'Je vous en prie', 'Mons
 const makeup = ['moisturizer', 'creame', 'foundation', 'eye shadow', 'perfume'];
 const availibility = ["exclusive", "exclusive - online only", "online only", ""];
 const hashtagArr = ['makeup', 'free', 'beauty', 'easy', 'nightout'];
-const ranksArr = ['rookie', 'expert', 'model'];
+const ranksArr = [
+  'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-badge-vib_rouge.png',
+  'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-engagement-rookie-03.png',
+  'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-badge-bi.png',
+  'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-engagement-rookie-01.png',
+  'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-badge-vib.png'
+];
 const userArr = ['woman', 'model', 'face', 'asian'];
 
 //get random element of input array
