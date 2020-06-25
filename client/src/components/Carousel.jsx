@@ -102,6 +102,7 @@ class Carousel extends React.Component{
 
   prevClick() {
     console.log('fn prevClick has run from Carousel.jsx');
+    track.style.transform = `translateX(940px)`;
   }
 
   nextClick(){

@@ -14,6 +14,7 @@ const makeup = ['moisturizer', 'creame', 'foundation', 'eye shadow', 'perfume'];
 const availibility = ["exclusive", "exclusive - online only", "online only", ""];
 const hashtagArr = ['makeup', 'free', 'beauty', 'easy', 'nightout'];
 const ranksArr = ['rookie', 'expert', 'model'];
+const userArr = ['woman', 'model', 'face', 'asian'];
 
 //get random element of input array
 let getRandomOf = (arr, min = 0, max = (arr.length -1)) => {
@@ -69,7 +70,7 @@ let genProduct = () => {
 let genUser = () => {
   let newUser = {
     username: faker.name.firstName() + faker.name.lastName(),
-    mainImg: "https://loremflickr.com/320/240/female,face,model/all",
+    mainImg: `https://loremflickr.com/320/320/female,${getRandomOf(userArr)},${getRandomOf(userArr)}/all`,
     image: "",
     title: faker.lorem.sentence(),
     category: faker.lorem.word(),
