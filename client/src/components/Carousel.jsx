@@ -73,9 +73,9 @@ class Carousel extends React.Component{
   componentDidMount() {
     // track = find(document.body, Track); //did not work
     track = document.getElementById('testTrack');
-    carouselWidth = document.getElementById('testCarousel').offsetWidth;
-    console.log(`CarouselWidth is ${carouselWidth}`);
-    console.log(`Track is ${track}`);
+    // carouselWidth = document.getElementById('testCarousel').offsetWidth;
+    // console.log(`CarouselWidth is ${carouselWidth}`);
+    // console.log(`Track is ${track}`);
   }
 
   prevClick() {
@@ -89,15 +89,17 @@ class Carousel extends React.Component{
     track.style.transform = `translateX(-940px)`;
   }
 
-  render() {return (
+  render() {
+    {console.log(this.props.users)};
+    return (
     <Wrapper>
       <div>'Looks(162)'</div>
       <br />
       <Container id='testCarousel'>
         <Track id='testTrack'>
-          {console.log(`this.props.users[0] is ${this.state.users[0]}`)}
+          {/* {console.log(`this.props.users[0] is ${this.state.users[0]}`)} */}
           <CardBox>
-            <Card>1</Card>
+            <Card><img src={this.props.users[0].image} /></Card>
           </CardBox>
           <CardBox>
             <Card>2</Card>

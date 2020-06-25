@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "test": "jest --config ./client/jest.config.json --collect-coverage",
+    "update": "jest --updateSnapshot",
     "test:watch": "npm run test -- --watch",
     "build": "webpack -d --watch",
     "db:seed": "node database/seed.js"

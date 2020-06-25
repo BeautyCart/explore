@@ -53,6 +53,7 @@ class App extends React.Component{
       let userData = getUserBasic(res.data);
       this.setState({users: userData});
       console.log(`index.jsx userdata is ${userData}`);
+      console.log(userData);
     })
   }
 
