@@ -1,9 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
 import Carousel from './components/Carousel.jsx';
+import Modal from './components/Modal.jsx';
 
 const axios = require('axios');
+
+const Temp = styled.div`
+  margin: auto;
+  padding: 10px 10px;
+`
+
+const Title = styled.p`
+  text-align: center;
+  margin: auto;
+  padding: 20px 10px;
+  font-family: georgia, times, serif;
+  font-size: 24px;
+  line-height: 1;
+`;
 
 let getUserBasic = (res) => {
   let users = [];
@@ -16,14 +32,19 @@ let getUserBasic = (res) => {
   return users;
 }
 
+
+
 class App extends React.Component{
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
+      show: false
     }
 
+    this.showModal = this.showModal.bind(this);
     this.getUsers = this.getUsers.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   getUsers() {
@@ -35,21 +56,33 @@ class App extends React.Component{
     })
   }
 
+  showModal(e) {
+    this.setState({
+      show: !this.state.show
+    })
+  }
+
+  onClose(e) {
+    this.props.onClose && this.props.onClose(e);
+  }
+
   componentDidMount() {
     this.getUsers();
   }
 
   render() {
     return (
-      <div>
-        <h2>Explore This Product</h2>
+      <Temp>
+        <Title>Explore This Product</Title>
         <div>
-          <div>Looks bar</div>
+          {/* <div>Looks bar</div> */}
           <div>
             <Carousel users={this.state.users} />
           </div>
         </div>
-      </div>
+        <button onClick={ e => {this.showModal()}}>Modal Test</button>
+        <Modal show={this.state.show} onClose={this.showModal}>Hello Modal!</Modal>
+      </Temp>
     )
   }
 };
