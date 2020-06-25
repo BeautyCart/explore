@@ -33,4 +33,20 @@ app.get('/explore/products', (req, res) => {
     }
   })
 })
+
+app.get('/user/:userId' , function (req,res) {
+  // console.log(`server req.params is ${req.params}`); //is {userId: ""}
+  // console.log(req.params);
+  User.find({'_id': req.params.userId}).exec((err, doc) => {
+    if (err) {
+      console.log(`Get req /user/:userId encounter err: ${err}`);
+      res.status(400).end();
+    } else {
+      // console.log(doc);
+      res.status(200).send(doc);
+    }
+  })
+});
+
+
 app.listen(port, () => {console.log(`Server listening at http://localhost:${port}`)});

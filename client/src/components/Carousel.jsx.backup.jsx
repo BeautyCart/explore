@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   /* overflow: hidden; */
   position: relative;
 `
+
 const Overflow = styled.div`
   width: 940px;
   /* background: #ccc; */
@@ -107,14 +108,16 @@ class Carousel extends React.Component{
   }
 
   nextClick(){
-    // console.log('fn nextClick has run from Carousel.jsx');
-    // console.log(`nextClick track is ${track}`);
+    console.log('fn nextClick has run from Carousel.jsx');
+    console.log(`nextClick track is ${track}`);
     // track.style.transform = `translateX(-${carouselWidth}px)`;
     track.style.transform = `translateX(-940px)`;
   }
 
   handleClick(e){
-    this.props.onProfileClick(e.target.id);
+    console.log(`handeclick value ${e.target}`);
+    console.log(e);
+    this.props.onProfileClick(e.target.value);
   }
 
   render() {
@@ -132,7 +135,7 @@ class Carousel extends React.Component{
             {/* {console.log(`this.props.users[0] is ${this.state.users[0]}`)} */}
             {this.props.users.map(user => (
               <CardBox>
-                <Card><Profile src={user.image} id={user.id} onClick={this.handleClick}></Profile></Card>
+                <Card><Profile src={user.image} value="hello kitty" onClick={this.handleClick}></Profile></Card>
               </CardBox>
             ))}
 

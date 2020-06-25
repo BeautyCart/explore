@@ -45,12 +45,14 @@ class App extends React.Component{
     super();
     this.state = {
       users: defaultUsers,
-      show: false
+      show: false,
+      currentUser: {}
     }
 
     this.showModal = this.showModal.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.onProfileClick = this.onProfileClick.bind(this);
   }
 
   getUsers() {
@@ -58,8 +60,8 @@ class App extends React.Component{
     .then((res) => {
       let userData = getUserBasic(res.data);
       this.setState({users: userData});
-      console.log(`index.jsx userdata is ${userData}`);
-      console.log(userData);
+      // console.log(`index.jsx userdata is ${userData}`);
+      // console.log(userData);
     })
   }
 
@@ -67,9 +69,22 @@ class App extends React.Component{
     this.setState({
       show: !this.state.show
     })
+    if (e) {console.log(`onProfileClick id is ${e.target.value}`)};
+  }
+
+  onProfileClick(e) {
+    let id;
+    if (e) {
+      console.log(`onProfileClick id is ${e}`);
+      axios.get(`/user/${e}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+    }
   }
 
   onClose(e) {
+    console.log("target value is: " + e.target.value);
     this.props.onClose && this.props.onClose(e);
   }
 
@@ -84,7 +99,7 @@ class App extends React.Component{
         <div>
           {/* <div>Looks bar</div> */}
           <div>
-            <Carousel users={this.state.users} />
+            <Carousel users={this.state.users} onProfileClick={this.onProfileClick}/>
           </div>
         </div>
         <button onClick={ e => {this.showModal()}}>Modal Test</button>

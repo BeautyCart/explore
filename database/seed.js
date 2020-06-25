@@ -70,7 +70,7 @@ let genProduct = () => {
 let genUser = () => {
   let newUser = {
     username: faker.name.firstName() + faker.name.lastName(),
-    mainImg: `https://loremflickr.com/320/320/female,${getRandomOf(userArr)},${getRandomOf(userArr)}/all`,
+    mainImg: `https://loremflickr.com/800/600/female,${getRandomOf(userArr)},${getRandomOf(userArr)}/all`,
     image: "",
     title: faker.lorem.sentence(),
     category: faker.lorem.word(),

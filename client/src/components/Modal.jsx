@@ -109,13 +109,13 @@ class Modal extends React.Component{
     // };
 
     // this.function = this.function.bind(this);
-    this.onClose = this.onClose.bind(this);
+    // this.onClose = this.onClose.bind(this);
   }
 
-  onClose(e) {
-    console.log(`onClose has run`);
-    this.props.show = false;
-  };
+  // onClose(e) {
+  //   console.log(`onClose has run`);
+  //   this.props.show = false;
+  // };
 
   render() {
     if(!this.props.show) {
@@ -127,7 +127,7 @@ class Modal extends React.Component{
           {/* <div>{this.props.children}</div> */}
           <Header>
             <div>Look info</div>
-            <Close onClick={this.props.onClose}>
+            <Close value='A value' onClick={this.props.onClose}>
               Close
             </Close>
           </Header>
