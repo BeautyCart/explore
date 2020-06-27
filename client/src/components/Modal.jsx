@@ -121,7 +121,13 @@ class Modal extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      users: "loading"
+      users: [
+        {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+        {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+        {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+        {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'},
+        {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'}
+      ]
     };
 
     // this.onClose = e => {
@@ -177,6 +183,7 @@ class Modal extends React.Component{
               </UserWrap>
             </MainInfo>
           </MainWrap>
+          <Carousel users={this.state.users} width={600} />
         </Container>
       </Wrapper>
   )}
