@@ -36,6 +36,7 @@ const MainWrap = styled.div`
   width: 913px;
   display: flex;
   flex-direction: row;
+  border-bottom: solid 1px #eee;
 `
 const Info = styled.div`
   display: flex;
@@ -51,10 +52,6 @@ const MainPane = styled.div`
 const MainImg = styled.img`
   max-width: 420px;
   object-fit: cover;
-  /* height: 500px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  box-sizing: border-box; */
 `
 const MainInfo = styled.div`
   display: flex;
@@ -88,8 +85,12 @@ const GroupText = styled.span`
   font-weight: 700;
 `
 
+const HashtagContainer = styled.div`
+  margin-top: 10px;
+  margin-bottom: 20px;
+`
 const Hashtags = styled.span`
-  color: lightblue;
+  color: #1470f5;
 `
 
 const UserWrap = styled.div`
@@ -124,7 +125,16 @@ const BadgeContainer = styled.div`
 `
 const UserInfo = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+`
+const Title = styled.p`
+  text-align: center;
+  margin: 30px auto;
+  font-family: georgia, times, serif;
+  font-size: 24px;
+  font-weight: 200;
+  line-height: 1;
+
 `
 class Modal extends React.Component{
   constructor(props) {
@@ -165,7 +175,7 @@ class Modal extends React.Component{
           <Header>
             <div>Look info</div>
             <Close value='A value' onClick={this.props.onClose}>
-              Close
+              X
             </Close>
           </Header>
           <MainWrap>
@@ -177,7 +187,9 @@ class Modal extends React.Component{
                 <InfoHeader>{this.props.user.title}
                 </InfoHeader>
                 <InfoGroupTime>in <GroupText>{this.props.user.category}</GroupText> | {this.props.user.time}</InfoGroupTime>
-                {this.props.user.hashtags && (<Hashtags>{this.props.user.hashtags.map(hash => {return `#${hash} `})}</Hashtags>)} {/*value to hashtags*/}
+                <HashtagContainer>
+                  {this.props.user.hashtags && (<Hashtags>{this.props.user.hashtags.map(hash => {return `#${hash} `})}</Hashtags>)} {/*value to hashtags*/}
+                </HashtagContainer>
               </InfoWrap>
               <UserWrap>
                 <Avatar></Avatar>
@@ -191,7 +203,8 @@ class Modal extends React.Component{
               </UserWrap>
             </MainInfo>
           </MainWrap>
-          <Carousel items={this.state.users} width={600} rows={4} showPages={true}/>
+          <Title>Shop This Look</Title>
+          <Carousel items={this.state.users} width={730} rows={5} showPages={true}/>
         </Container>
       </Wrapper>
   )}

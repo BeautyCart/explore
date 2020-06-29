@@ -72,8 +72,6 @@ class App extends React.Component{
     .then((res) => {
       let userData = getUserBasic(res.data);
       this.setState({users: userData});
-      // console.log(`index.jsx userdata is ${userData}`);
-      // console.log(userData);
     })
   }
 
@@ -81,7 +79,6 @@ class App extends React.Component{
     this.setState({
       show: !this.state.show
     })
-    // if (e) {console.log(`onProfileClick id is ${e.target.value}`)};
   }
 
   onProfileClick(e) {
@@ -110,18 +107,12 @@ class App extends React.Component{
     return (
       <Temp>
         <Title>Explore This Product</Title>
-        <SvgContainer>
-          <svg viewbox="0 0 13.5 13.5">
-            <path d="M45.479,17.482C33.7-10.258.22-3.785,0,28.411-0.123,46.094,15.942,52.7,26.638,59.773,37.01,66.628,44.392,76.007,45.549,80c0.99-3.912,9.212-13.555,18.813-20.418C74.86,52.077,91.123,45.9,91,28.219,90.779-4.057,56.716-9.151,45.479,17.482Z" />
-          </svg>
-        </SvgContainer>
         <div>
           {/* <div>Looks bar</div> */}
           <div>
             <Carousel items={this.state.users} onProfileClick={this.onProfileClick} tabs/>
           </div>
         </div>
-        {/* <button onClick={ e => {this.showModal()}}>Modal Test</button> */}
         <Modal show={this.state.show} user={this.state.currentUser} onClose={this.showModal}>Hello Modal!</Modal>
       </Temp>
     )
