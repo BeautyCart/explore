@@ -78,11 +78,20 @@ const InfoHeader = styled.div`
   font-weight: 700;
 `
 const InfoGroupTime = styled.div`
+  padding: 10px 0px;
   font-family: "helvetica neue",helvetica,arial,sans-serif;
   color: rgb(117, 117, 117);
   font-size: 12px;
+  font-weight: 400;
+`
+const GroupText = styled.span`
   font-weight: 700;
 `
+
+const Hashtags = styled.span`
+  color: lightblue;
+`
+
 const UserWrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -166,10 +175,9 @@ class Modal extends React.Component{
             <MainInfo>
               <InfoWrap>
                 <InfoHeader>{this.props.user.title}
-
                 </InfoHeader>
-                <InfoGroupTime>{this.props.user.category} | {this.props.user.time}</InfoGroupTime>
-                <span>{this.props.user.hashtags}</span>
+                <InfoGroupTime>in <GroupText>{this.props.user.category}</GroupText> | {this.props.user.time}</InfoGroupTime>
+                {this.props.user.hashtags && (<Hashtags>{this.props.user.hashtags.map(hash => {return `#${hash} `})}</Hashtags>)} {/*value to hashtags*/}
               </InfoWrap>
               <UserWrap>
                 <Avatar></Avatar>
@@ -183,7 +191,7 @@ class Modal extends React.Component{
               </UserWrap>
             </MainInfo>
           </MainWrap>
-          <Carousel users={this.state.users} width={600} />
+          <Carousel items={this.state.users} width={600} rows={4} showPages={true}/>
         </Container>
       </Wrapper>
   )}

@@ -21,6 +21,12 @@ const Title = styled.p`
   line-height: 1;
 `;
 
+const SvgContainer = styled.div`
+    background-color: 'lightpink';
+    width: 20px;
+    height: 20px;
+`;
+
 let getUserBasic = (res) => {
   let users = [];
   for (var i = 0; i < res.length; i++) {
@@ -104,10 +110,15 @@ class App extends React.Component{
     return (
       <Temp>
         <Title>Explore This Product</Title>
+        <SvgContainer>
+          <svg viewbox="0 0 13.5 13.5">
+            <path d="M45.479,17.482C33.7-10.258.22-3.785,0,28.411-0.123,46.094,15.942,52.7,26.638,59.773,37.01,66.628,44.392,76.007,45.549,80c0.99-3.912,9.212-13.555,18.813-20.418C74.86,52.077,91.123,45.9,91,28.219,90.779-4.057,56.716-9.151,45.479,17.482Z" />
+          </svg>
+        </SvgContainer>
         <div>
           {/* <div>Looks bar</div> */}
           <div>
-            <Carousel users={this.state.users} onProfileClick={this.onProfileClick}/>
+            <Carousel items={this.state.users} onProfileClick={this.onProfileClick} tabs/>
           </div>
         </div>
         {/* <button onClick={ e => {this.showModal()}}>Modal Test</button> */}

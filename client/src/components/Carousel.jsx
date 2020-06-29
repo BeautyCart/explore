@@ -42,18 +42,14 @@ const CardBox = styled(Container)`
   flex-shrink: 0;
   height: ${props => props.cardWidth}px;
   max-height: ${props => props.cardWidth}px;
-  /* border: 1px solid #aaa; */
   padding: 0px 12px;
   box-sizing: border-box;
 `
-// height: ${props => props.settings.cardWidth}px;
 
 const Card = styled(CardBox)`
   width: 100%
   height: 100%;
   padding: 0px;
-  /* background: blue; */
-  /* border: 1px solid #aaa; */
 `
 const Profile = styled.img`
   width: ${props => props.cardWidth}px;
@@ -84,6 +80,21 @@ const NavRight = styled(Nav)`
   right: -30px;
   opacity: ${props => (props.max < 1) ? 1 :  0.2};
 `
+
+const TabsContainer = styled.div`
+  text-align: center;
+`
+
+const Tabs = styled.div`
+  height: 10px;
+  width: 10px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 15px 7.5px 10px;
+  opacity: ${props => props.current ? 1 : 0.2};
+`
+
 let track;
 let carouselWidth;
 
@@ -99,13 +110,14 @@ class Carousel extends React.Component{
         width: (this.props.width) ? this.props.width : 940,
         padding: (this.props.padding) ? this.props.padding : 12,
         rows: (this.props.rows) ? this.props.rows : 5,
-        get cardWidth(){return (this.width - (this.padding * this.rows * 2))/5}
+        get cardWidth(){return (this.width - (this.padding * this.rows * 2))/this.rows}
         // cardWidth: `${(this.width - this.padding * 2) / 5}px`
       }
     };
     this.prevClick = this.prevClick.bind(this);
     this.nextClick = this.nextClick.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.setPageClick = this.setPageClick.bind(this);
   }
 
   initSettings() {
@@ -124,7 +136,11 @@ class Carousel extends React.Component{
     // console.log(`Track is ${track}`);
   }
 
-
+  setPageClick(page, e) {
+    if (page !== this.state.index) {
+      this.setState({index: page});
+    }
+  }
 
   prevClick() {
     // console.log('fn prevClick has run from Carousel.jsx');
@@ -134,9 +150,10 @@ class Carousel extends React.Component{
   }
 
   nextClick(){
-    // console.log('fn nextClick has run from Carousel.jsx');
-    let row = 5; //change when rows are customizable
-    let maxIndex = (this.state.index + 1) / Math.ceil(this.props.users.length / row); //check if index has reached end
+    console.log('fn nextClick has run from Carousel.jsx');
+    let row = this.state.settings.rows;
+    let maxIndex = (this.state.index + 1) / Math.ceil(this.props.items.length / row); //check if index has reached end
+    console.log(`maxIndex is ${maxIndex}`);
     if (maxIndex < 1) {
       this.setState({index: this.state.index + 1});
     };
@@ -144,26 +161,25 @@ class Carousel extends React.Component{
 
   handleClick(e){
     this.props.onProfileClick(e.target.id);
+    console.log(`this in handleclick is: ${e.target}`)
   }
 
   render() {
-    // {console.log(`This is render props.users` + this.props.users.length)}
-    // {console.log(this.props.users)};
-    // this.props.users.map(user => {console.log(`User in maps is ${user}`)})
-    // this.props.users.map(user => {console.log(user)})
-    console.log(`padding is ${this.state.settings.cardWidth}`);
-    let maxIndex = (this.state.index + 1) / Math.ceil(this.props.users.length / 5);
+    let indexAmount = Math.ceil(this.props.items.length / this.state.settings.rows)
+    let maxIndex = (this.state.index + 1) / indexAmount;
     let {padding, cardWidth} = this.state.settings;
+    let tabs = [];
+    for(var i = 0; i < indexAmount; i++) {
+      tabs.push(<Tabs value={i} onClick={this.setPageClick.bind(this, i)} current={i == this.state.index}></Tabs>)
+    }
     return (
     <Wrapper settings={this.state.settings}>
-      <div>'Looks(162)'</div>
-      <br />
       <Container id='testCarousel' settings={this.state.settings}>
         <Overflow settings={this.state.settings}>
           <Track id='testTrack' settings={this.state.settings} index={this.state.index}>
-            {this.props.users.map(user => (
+            {this.props.items.map(item => (
               <CardBox cardWidth={cardWidth} padding={padding}>
-                <Card><Profile src={user.image} id={user.id} onClick={this.handleClick} cardWidth={cardWidth}></Profile></Card>
+                <Card><Profile src={item.image} id={item.id} onClick={this.handleClick} cardWidth={cardWidth}></Profile></Card>
               </CardBox>
             ))}
           </Track>
@@ -181,6 +197,7 @@ class Carousel extends React.Component{
           </svg>
         </NavRight>
       </Container>
+      {this.props.tabs && <TabsContainer>{tabs}</TabsContainer>}
     </Wrapper>
   )}
 }
