@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App.jsx';
+import ExploreApp from './components/ExploreApp.jsx';
 
-ReactDOM.render(<App />, document.getElementById("main"));
+ReactDOM.render(<ExploreApp />, document.getElementById("main"));

@@ -46,7 +46,7 @@ let getUserBasic = (res) => {
 //   {id: '', image: 'https://loremflickr.com/320/240/female,face,model/all'}
 // ];
 
-class App extends React.Component{
+class ExploreApp extends React.Component{
   constructor() {
     super();
     this.state = {
@@ -119,4 +119,4 @@ class App extends React.Component{
   }
 };
 
-export default App;
+export default ExploreApp;
