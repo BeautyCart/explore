@@ -68,7 +68,7 @@ class ExploreApp extends React.Component{
   }
 
   getUsers() {
-    axios.get('/explore')
+    axios.get('/explorethis/explore')
     .then((res) => {
       let userData = getUserBasic(res.data);
       this.setState({users: userData});
@@ -86,7 +86,7 @@ class ExploreApp extends React.Component{
     if (e) {
       this.showModal();
       console.log(`onProfileClick id is ${e}`);
-      axios.get(`/user/${e}`)
+      axios.get(`/explorethis/user/${e}`)
       .then((res) => {
         console.log(res.data[0]);
         this.setState({currentUser: res.data[0]});
