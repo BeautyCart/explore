@@ -3,6 +3,7 @@ const db = require('./index.js');
 // mongoose.Promise = global.Promise;
 
 const userSchema = new mongoose.Schema({
+  productId: String,
   username: String,
   mainImg: String,
   img: String,

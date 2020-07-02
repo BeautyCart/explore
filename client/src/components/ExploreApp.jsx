@@ -27,6 +27,24 @@ const SvgContainer = styled.div`
     height: 20px;
 `;
 
+let getUserDetails = (arr) => {
+  let users = [];
+  // console.log(arr);
+  for (var i = 0; i < arr.length; i++) {
+    users.push(axios.get(`/explorethis/user/${arr[i]}`)
+    .then((res) => {
+      let data = res.data[0];
+      let obj = {
+        'id': data['productId'],
+        'image': data['mainImg']
+      };
+      return obj;
+    }))
+  };
+
+  return Promise.all(users).then(result => result)
+};
+
 let getUserBasic = (res) => {
   let users = [];
   for (var i = 0; i < res.length; i++) {
@@ -36,6 +54,12 @@ let getUserBasic = (res) => {
     })
   }
   return users;
+}
+
+let getProductId = () => {
+  let path = window.location.pathname;
+  let productId = path.split('/').filter(split => split !== "").pop();
+  return productId;
 }
 
 // let defaultUsers = [
@@ -68,11 +92,17 @@ class ExploreApp extends React.Component{
   }
 
   getUsers() {
-    axios.get('/explorethis/explore')
-    .then((res) => {
-      let userData = getUserBasic(res.data);
-      this.setState({users: userData});
-    })
+    getProductId();
+    let productId = getProductId();
+    axios.get(`/explorethis/product/${productId}`)
+    // .then((res) => console.log(res.data))
+    .then((res) => getUserDetails(res.data[0].users))
+    .then((res) => this.setState({users: res}))
+    // axios.get('/explorethis/explore')
+    // .then((res) => {
+    //   let userData = getUserBasic(res.data);
+    //   this.setState({users: userData});
+    // })
   }
 
   showModal(e) {

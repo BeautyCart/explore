@@ -5,8 +5,8 @@ const User = require('./User.js');
 var faker = require('faker');
 
 //drop existing collections
-db.dropCollection('users', (err, res) => {console.log('dropped users')});
-db.dropCollection('products', (err, res) => {console.log('dropped products5')});
+// db.dropCollection('users', (err, res) => {console.log('dropped users')});
+// db.dropCollection('products', (err, res) => {console.log('dropped products5')});
 
 //presets
 const french = ['Homme', 'Femme', 'Au Revoir', 'Monde', 'Je vous en prie', 'Monsieur', 'Mademoiselle', 'J’ai envie de toi', 'Embrasse-moi', 'J’aime ça'];
@@ -20,7 +20,7 @@ const ranksArr = [
   'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-engagement-rookie-01.png',
   'https://photorankstatics-a.akamaihd.net/static/frontend/sephora-js/assets/img/og-badge-vib.png'
 ];
-const userArr = ['woman', 'model', 'face', 'asian'];
+const userArr = ['woman', 'model', 'face', 'beauty', 'glam'];
 
 //get random element of input array
 let getRandomOf = (arr, min = 0, max = (arr.length -1)) => {
@@ -50,9 +50,21 @@ let capFirstLetter = (str) => {
   return str;
 }
 
+let genRandomUsers = () => {
+  let res = [];
+  let times = getRandomNum(9,18);
+  for (i = 0; i < times; i++) {
+    let ranUser = Math.ceil(getRandomNum(0, 30));
+    let padded = (ranUser).toString().padStart(4, '0');
+    res.push(padded);
+  }
+  return res;
+}
+
 //generate a new random product and insert to db
-let genProduct = () => {
+let genProduct = (i) => {
   let newObj = {
+    productId: i,
     name: faker.name.firstName() + " " + faker.name.lastName(),
     brand: capFirstLetter(faker.lorem.word()),
     title: genProdName(),
@@ -65,16 +77,18 @@ let genProduct = () => {
     loves: getRandomNum(0,100),
     price: Math.floor(getRandomNum(5,200)),
     avail: getRandomOf(availibility),
+    users: genRandomUsers(),
     shipping: "free shipping"
   }
 
   Product.create(newObj)
-    .then(() => console.log("inserted new product!"))
+    // .then(() => console.log("inserted new product!"))
 }
 
 //generate a new random user and insert to db
-let genUser = () => {
+let genUser = (i) => {
   let newUser = {
+    'productId': i,
     username: faker.name.firstName() + faker.name.lastName(),
     mainImg: `https://loremflickr.com/800/600/female,${getRandomOf(userArr)},${getRandomOf(userArr)}/all`,
     image: "",
@@ -88,19 +102,41 @@ let genUser = () => {
   }
 
   User.create(newUser)
-    .then(() => console.log('inserted new user!'))
+    // .then(() => console.log('inserted new user!'))
+    .catch((err) => console.log(err))
 }
 
 //run function x amount of times
 let generateXtimes = (func, times = 1) => {
   for (var i = 0; i < times; i++) {
-    func();
+    let padded = (i+1).toString().padStart(4, '0');
+    func(padded);
   };
 }
 
 // genUser();
 // genProduct();
 
-//generate users and products
-generateXtimes(genUser, 20);
-generateXtimes(genProduct, 100);
+// generateXtimes(genUser, 31);
+// generateXtimes(genProduct, 100);
+
+// generate users and products
+// db.dropCollection('users').then(() => {
+//   console.log('Dropped users');
+//   generateXtimes(genUser, 31);
+// }).catch((err) => console.log(err));
+
+// db.dropCollection('products').then(() => {
+//   console.log('Dropped products');
+//   generateXtimes(genProduct, 100);
+// }).catch((err) => console.log(err));
+
+db.dropCollection('users', (err, res) => {
+  console.log('dropped users');
+  generateXtimes(genUser, 31);
+});
+
+db.dropCollection('products', (err, res) => {
+  console.log('dropped products');
+  generateXtimes(genProduct, 100);
+});
