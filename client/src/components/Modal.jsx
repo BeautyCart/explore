@@ -28,7 +28,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 15px;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 `
 const Close = styled.button`
 `
