@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 913px;
   min-height: 600px;
-  margin: 10% auto;
+  margin: 40px auto auto auto;
   background: white;
   border: 1px solid #ccc;
   /* box-sizing: border-box; */
