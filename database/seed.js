@@ -1,8 +1,14 @@
-const db = require('./index.js');
+// const db = require('./index.js');
 const Product = require('./Product.js');
 const User = require('./User.js');
 
 var faker = require('faker');
+
+const mongoose = require('mongoose');
+// const monUrl = 'mongodb://mongo:27017/explore';
+const monUrl = 'mongodb://localhost/explore';
+mongoose.connect(monUrl);
+const db = mongoose.connection;
 
 //drop existing collections
 // db.dropCollection('users', (err, res) => {console.log('dropped users')});
@@ -80,9 +86,7 @@ let genProduct = (i) => {
     users: genRandomUsers(),
     shipping: "free shipping"
   }
-
-  Product.create(newObj)
-    // .then(() => console.log("inserted new product!"))
+  Product.create(newObj);
 }
 
 //generate a new random user and insert to db
@@ -97,17 +101,14 @@ let genUser = (i) => {
     time: faker.date.recent(),
     hashtags: [getRandomOf(hashtagArr), getRandomOf(hashtagArr)],
     ranks: [getRandomOf(ranksArr), getRandomOf(ranksArr)],
-    disc: faker.lorem.sentences(),
-    // products: getRandomOf(productsArr)
+    disc: faker.lorem.sentences()
   }
-
-  User.create(newUser)
-    // .then(() => console.log('inserted new user!'))
-    .catch((err) => console.log(err))
+  User.create(newUser);
 }
 
 //run function x amount of times
 let generateXtimes = (func, times = 1) => {
+  let res = [];
   for (var i = 0; i < times; i++) {
     let padded = (i+1).toString().padStart(4, '0');
     func(padded);
@@ -117,8 +118,8 @@ let generateXtimes = (func, times = 1) => {
 // genUser();
 // genProduct();
 
-// generateXtimes(genUser, 31);
-// generateXtimes(genProduct, 100);
+generateXtimes(genUser, 31);
+generateXtimes(genProduct, 100);
 
 // generate users and products
 // db.dropCollection('users').then(() => {
@@ -131,12 +132,88 @@ let generateXtimes = (func, times = 1) => {
 //   generateXtimes(genProduct, 100);
 // }).catch((err) => console.log(err));
 
-db.dropCollection('users', (err, res) => {
-  console.log('dropped users');
-  generateXtimes(genUser, 31);
-});
+// db.dropCollection('users', (err, res) => {
+//   console.log('dropped users');
+//   generateXtimes(genUser, 31);
+// });
 
-db.dropCollection('products', (err, res) => {
-  console.log('dropped products');
-  generateXtimes(genProduct, 100);
-});
+// db.dropCollection('products', (err, res) => {
+//   console.log('dropped products');
+//   generateXtimes(genProduct, 100);
+// });
+
+// let userProm = generateXtimes(genUser, 31);
+// let prodProm = generateXtimes(genProduct, 100);
+
+// db.dropCollection('users')
+// .then(() => {
+//   console.log('Dropped Users');
+//   let userProm = generateXtimes(genUser, 31);
+//   Promise.all(userProm)
+// })
+// .then(() => {
+//   db.dropCollection('products')
+// })
+// .catch((err) => {
+//   console.log(`Error during seeding: ${err}`);
+// })
+// .then(() => {
+//   console.log('Dropped Products');
+//   let prodProm = generateXtimes(genProduct, 100);
+//   Promise.all(prodProm)
+// })
+// .then(() => {
+//   db.close()
+// })
+// .catch((err) => {
+//   console.log(`Error during seeding: ${err}`);
+// })
+
+
+///////////////////
+
+// let genProduct = (i) => {
+//   let newObj = {
+//     productId: i,
+//     name: faker.name.firstName() + " " + faker.name.lastName(),
+//     brand: capFirstLetter(faker.lorem.word()),
+//     title: genProdName(),
+//     mainImages: "https://loremflickr.com/320/240/",
+//     snip: faker.lorem.sentences(),
+//     size: genSize(),
+//     sku: Math.floor(getRandomNum(10000, 199999)),
+//     stars: getRandomNum(1,5),
+//     reviews: getRandomNum(0,100),
+//     loves: getRandomNum(0,100),
+//     price: Math.floor(getRandomNum(5,200)),
+//     avail: getRandomOf(availibility),
+//     users: genRandomUsers(),
+//     shipping: "free shipping"
+//   }
+//   let res = () => {Product.create(newObj)};
+//   return res
+//     // .then(() => console.log("inserted new product!"))
+//     // .catch((err) => console.log(err))
+// }
+
+// //generate a new random user and insert to db
+// let genUser = (i) => {
+//   let newUser = {
+//     'productId': i,
+//     username: faker.name.firstName() + faker.name.lastName(),
+//     mainImg: `https://loremflickr.com/800/600/female,${getRandomOf(userArr)},${getRandomOf(userArr)}/all`,
+//     image: "",
+//     title: faker.lorem.sentence(),
+//     category: faker.lorem.word(),
+//     time: faker.date.recent(),
+//     hashtags: [getRandomOf(hashtagArr), getRandomOf(hashtagArr)],
+//     ranks: [getRandomOf(ranksArr), getRandomOf(ranksArr)],
+//     disc: faker.lorem.sentences(),
+//     // products: getRandomOf(productsArr)
+//   }
+//   let res = User.create(newUser);
+
+//   return res
+//     // .then(() => console.log('inserted new user!'))
+//     // .catch((err) => console.log(err))
+// }
