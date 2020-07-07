@@ -1,19 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const Product = require('../database/Product.js');
 const User = require('../database/User.js');
 
 const app = express();
-const port = 80;
+const port = 3141;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', express.static(__dirname + '/../client/dist'));
 app.use('/:productId', express.static(__dirname + '/../client/dist'));
-app.use('/explorethis', express.static(__dirname + '/../client/dist'));
 // app.use('/explorethis', express.static(__dirname + '/../client/dist'));
+app.use('/explorethis/:productId', express.static(__dirname + '/../client/dist'));
 
 app.get('/explorethis/explore' , function (req,res) {
   User.find().limit(13).exec((err, doc) => {

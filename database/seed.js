@@ -1,4 +1,4 @@
-// const db = require('./index.js');
+const db = require('./index.js');
 const Product = require('./Product.js');
 const User = require('./User.js');
 
@@ -6,9 +6,9 @@ var faker = require('faker');
 
 const mongoose = require('mongoose');
 // const monUrl = 'mongodb://mongo:27017/explore';
-const monUrl = 'mongodb://localhost/explore';
-mongoose.connect(monUrl);
-const db = mongoose.connection;
+// const monUrl = 'mongodb://localhost/explore';
+// mongoose.connect(monUrl);
+// const db = mongoose.connection;
 
 //drop existing collections
 // db.dropCollection('users', (err, res) => {console.log('dropped users')});
