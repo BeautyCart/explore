@@ -31,6 +31,15 @@ const Header = styled.div`
   border-bottom: 1px solid #ccc;
 `
 const Close = styled.button`
+  width: 32px;
+  height: 32px;
+  button:focus {outline:0;};
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 `
 const MainWrap = styled.div`
   width: 913px;
@@ -74,6 +83,13 @@ const InfoHeader = styled.div`
   font-size: 14px;
   font-weight: 700;
 `
+const HeaderTitle = styled(InfoHeader)`
+  font-size: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 20px;
+`
+
 const InfoGroupTime = styled.div`
   padding: 10px 0px;
   font-family: "helvetica neue",helvetica,arial,sans-serif;
@@ -121,6 +137,7 @@ const LeftWrap = styled.div`
 `
 const BadgeContainer = styled.div`
   display: flex;
+  padding: 5px 0px;
   flex-direction: row;
 `
 const UserInfo = styled.div`
@@ -136,6 +153,19 @@ const Title = styled.p`
   line-height: 1;
 
 `
+let prodImages = [
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora1.jpg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora2.jpg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/Sephora3.jpg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sophora4.jpeg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora5.jpg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sophora6.jpeg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora7.jpg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora8.jpeg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora9.jpeg',
+  'https://sephjen.s3-us-west-1.amazonaws.com/sephora10.webp'
+];
+
 class Modal extends React.Component{
   constructor(props) {
     super(props);
@@ -149,13 +179,8 @@ class Modal extends React.Component{
       ]
     };
 
-    // this.onClose = e => {
-    //   this.props.show = false;
-    //   console.log(`onClose has run`);
-    // };
-
-    // this.function = this.function.bind(this);
     this.greyOnClose = this.greyOnClose.bind(this);
+    this.getProds = this.getProds.bind(this);
   }
 
   greyOnClose(e) {
@@ -163,6 +188,25 @@ class Modal extends React.Component{
       this.props.onClose();
     }
   };
+
+  getProds() {
+    let prods = [...prodImages];
+    let newUsers = [];
+    for (var i = 0; i < 7; i++) {
+      let index = Math.floor(Math.random() * (prods.length)) + 0;
+      console.log(`index is ${index}`);
+      let prod = prods[index];
+      prods.splice(index, 1);
+      console.log(`prod is ${prod}`)
+      newUsers.push({id: '', image: prod})
+    }
+    return newUsers;
+  }
+
+  componentDidMount() {
+    let newState = this.getProds();
+    this.setState({'users': newState})
+  }
 
   render() {
     if(!this.props.show) {
@@ -173,9 +217,11 @@ class Modal extends React.Component{
         <Container>
           {/* <div>{this.props.children}</div> */}
           <Header>
-            <div>Look info</div>
+            <HeaderTitle>Photo info</HeaderTitle>
             <Close value='A value' onClick={this.props.onClose}>
-              X
+              <svg viewBox="0 0 20 20">
+                <path d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+              </svg>
             </Close>
           </Header>
           <MainWrap>
@@ -204,7 +250,7 @@ class Modal extends React.Component{
             </MainInfo>
           </MainWrap>
           <Title>Shop This Look</Title>
-          <Carousel items={this.state.users} width={730} rows={5} showPages={true}/>
+          <Carousel items={this.state.users} width={600} rows={4} showPages={true}/>
         </Container>
       </Wrapper>
   )}

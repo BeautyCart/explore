@@ -10,7 +10,8 @@
     "test:watch": "npm run test -- --watch",
     "build": "webpack -d --watch",
     "pbuild": "webpack --mode production",
-    "db:seed": "node database/seed.js"
+    "db:seed": "node database/seed.js",
+    "db:clear": "node database/clear.js"
   },
   "repository": {
     "type": "git",

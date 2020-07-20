@@ -27,9 +27,12 @@ const SvgContainer = styled.div`
     height: 20px;
 `;
 
+const Spacer = styled.div`
+  min-height: 170px;
+`
+
 let getUserDetails = (arr) => {
   let users = [];
-  // console.log(arr);
   for (var i = 0; i < arr.length; i++) {
     users.push(axios.get(`/explorethis/user/${arr[i]}`)
     .then((res) => {
@@ -95,14 +98,8 @@ class ExploreApp extends React.Component{
     getProductId();
     let productId = getProductId();
     axios.get(`/explorethis/product/${productId}`)
-    // .then((res) => console.log(res.data))
     .then((res) => getUserDetails(res.data[0].users))
     .then((res) => this.setState({users: res}))
-    // axios.get('/explorethis/explore')
-    // .then((res) => {
-    //   let userData = getUserBasic(res.data);
-    //   this.setState({users: userData});
-    // })
   }
 
   showModal(e) {
@@ -115,7 +112,6 @@ class ExploreApp extends React.Component{
     let id;
     if (e) {
       this.showModal();
-      console.log(`onProfileClick id is ${e}`);
       axios.get(`/explorethis/user/${e}`)
       .then((res) => {
         console.log(res.data[0]);
@@ -125,7 +121,6 @@ class ExploreApp extends React.Component{
   }
 
   onClose(e) {
-    console.log("target value is: " + e.target.value);
     this.props.onClose && this.props.onClose(e);
   }
 
@@ -142,6 +137,7 @@ class ExploreApp extends React.Component{
           <div>
             <Carousel items={this.state.users} onProfileClick={this.onProfileClick} tabs/>
           </div>
+          <Spacer></Spacer>
         </div>
         <Modal show={this.state.show} user={this.state.currentUser} onClose={this.showModal}>Hello Modal!</Modal>
       </Temp>

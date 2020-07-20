@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 // mongoose.connect(monUrl);
 // const db = mongoose.connection;
 
-//drop existing collections
+// drop existing collections
 // db.dropCollection('users', (err, res) => {console.log('dropped users')});
 // db.dropCollection('products', (err, res) => {console.log('dropped products5')});
 
